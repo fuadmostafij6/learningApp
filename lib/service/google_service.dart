@@ -18,7 +18,6 @@ class Googlehelper {
     if (googleCurrentUser != null) {
       googlesignin.signOut();
       await firebaseAuth.signOut();
-
       final googleUser = await googlesignin.signIn();
       if (googleUser != null) {
         user = googleUser;

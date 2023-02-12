@@ -31,13 +31,12 @@ class GoogleLoginScreen extends StatelessWidget {
                     color: Colors.deepPurpleAccent,
                     borderRadius: BorderRadius.circular(30)
                   ),
-                child: Row(
+                child:controllar.loading?Center(child: CircularProgressIndicator(),):
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image(image:AssetImage("image/googleimage.png",),height: 50,width: 50,),
                     Text('Login',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),),
-
-
                   ],
                 ),
                 ),

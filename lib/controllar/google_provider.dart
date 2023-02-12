@@ -9,12 +9,20 @@ import '../service/google_service.dart';
 
 class GoogleLogin extends ChangeNotifier{
 
+  bool loading = false;
+
   login(BuildContext context)async{
+
     final user =await Googlehelper().signInWithGoogle(context);
 
     if(user!=null){
+      loading=true;
+      notifyListeners();
       NewPageRout.newPage(context, const HomePage());
+      loading=false;
+      notifyListeners();
     }
+
   }
 
 }
