@@ -1,5 +1,6 @@
 
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -8,7 +9,8 @@ class Googlehelper {
   final googlesignin = GoogleSignIn();
 
   GoogleSignInAccount? user;
-  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  static FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  static final FireBaseStore =  FirebaseFirestore.instance;
 
   Future<UserCredential?> signInWithGoogle(BuildContext context) async {
     final googleCurrentUser = firebaseAuth.currentUser;
