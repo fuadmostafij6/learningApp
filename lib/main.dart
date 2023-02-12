@@ -1,12 +1,23 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:learningapp/controllar/google_provider.dart';
+import 'package:learningapp/screen/auth/google_loginpage.dart';
 import 'package:learningapp/screen/homescreen.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   //fsf
   await Firebase.initializeApp();
-  runApp(const MyApp());
+
+  runApp( MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: ((context) => GoogleLogin())),
+
+    ],
+
+  child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -18,10 +29,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(),
+      home: GoogleLoginScreen(),
+
     );
   }
 }
