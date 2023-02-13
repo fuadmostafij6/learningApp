@@ -44,6 +44,8 @@ dependencies:
 
   #state_management
   provider: ^6.0.5
+  #flutter Toast:
+  fluttertoast: ^8.1.3
 
   #pdf
   syncfusion_flutter_pdfviewer: ^20.4.49

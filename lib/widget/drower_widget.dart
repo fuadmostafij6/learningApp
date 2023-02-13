@@ -5,7 +5,7 @@ import '../screen/ForumScreen.dart';
 import '../screen/auth/google_loginpage.dart';
 import '../service/google_service.dart';
 
-Drawer buildDrawer(BuildContext context) {
+Widget buildDrawer(BuildContext context) {
   return Drawer(
     child: ListView(
       shrinkWrap: true,
