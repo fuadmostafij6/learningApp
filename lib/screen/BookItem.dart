@@ -15,8 +15,10 @@ class BookItemList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-
+      appBar:  PreferredSize(
+        preferredSize: AppBar().preferredSize,
+        child:
+        NewAppBar.buildAppBar(name: "Books",),
       ),
       body: FutureBuilder(
         future: Googlehelper.FireBaseStore.collection("book")
@@ -38,6 +40,7 @@ class BookItemList extends StatelessWidget {
                 ),
                 itemBuilder: (BuildContext context, int index){
                    DocumentSnapshot data = snapshot.data!.docs[index];
+                   print(data["book_item"]);
                   return InkWell(
                     onTap: (){
                        NewPageRout.newPage(context, PdfList(bookList:data["book_list"],

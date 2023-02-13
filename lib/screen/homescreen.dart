@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:learningapp/controllar/google_provider.dart';
 import 'package:learningapp/screen/BookItem.dart';
+import 'package:learningapp/screen/auth/google_loginpage.dart';
 import 'package:learningapp/widget/books_containar.dart';
 
 import '../constant/rout_page.dart';
@@ -13,15 +15,25 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white60,
-         leading: Icon(Icons.menu,size: 25,),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 25),
-              child: Icon(Icons.search,size: 30,),
-            ),
-          ],
+        appBar:
+
+        PreferredSize(
+          preferredSize: AppBar().preferredSize,
+          child:
+          NewAppBar.buildAppBar(name: "Home", ),
+        ),
+        drawer: Drawer(
+          child: ListView(
+            children: [
+              ListTile(
+                title: Text("Log out"),
+                onTap: ()async{
+                  await Googlehelper.firebaseAuth.signOut();
+                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (c)=>GoogleLoginScreen()), (route) => false);
+                },
+              )
+            ],
+          ),
         ),
         body: FutureBuilder(
            future: Googlehelper.FireBaseStore.collection("book").get(),
@@ -60,6 +72,8 @@ class HomePage extends StatelessWidget {
     );
 
   }
+
+
 }
 //ListView.builder(
 //                 itemCount: snapshot.data!.docs.length,

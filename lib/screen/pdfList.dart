@@ -2,6 +2,9 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:learningapp/screen/PdfViewPage.dart';
+
+import '../constant/rout_page.dart';
 
 class PdfList extends StatelessWidget {
   final Map bookList;
@@ -13,9 +16,14 @@ class PdfList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(name),
-      ),
+
+
+      appBar:  PreferredSize(
+        preferredSize: AppBar().preferredSize,
+    child:
+    NewAppBar.buildAppBar(name: name,),
+    ),
+
 
       body:
           Column(
@@ -38,10 +46,16 @@ class PdfList extends StatelessWidget {
                     String key = bookList.keys.elementAt(index);
 
                     return ListTile(
-
+onTap: (){
+  NewPageRout.newPage(context, PdfViewScreen(link:bookList[key].toString() ,name:key ,));
+},
                       title: Text(key),
-                      subtitle: Text("${bookList[key]}"),
+                      // subtitle: Text("${bookList[key]}"),
+                      leading: CircleAvatar(
+                        backgroundImage: NetworkImage(image),
 
+                      ),
+                      trailing: Icon(Icons.arrow_circle_right),
 
 
                     );

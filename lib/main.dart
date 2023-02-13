@@ -34,9 +34,12 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+
+
+
       ),
       home:
-      Googlehelper.firebaseAuth.currentUser!.email ==null?
+      Googlehelper.firebaseAuth.currentUser ==null?
       GoogleLoginScreen(): HomePage(),
 
     );

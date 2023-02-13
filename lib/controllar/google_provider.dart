@@ -12,13 +12,14 @@ class GoogleLogin extends ChangeNotifier{
   bool loading = false;
 
   login(BuildContext context)async{
-
+    loading=true;
+    notifyListeners();
     final user =await Googlehelper().signInWithGoogle(context);
 
     if(user!=null){
-      loading=true;
-      notifyListeners();
-      NewPageRout.newPage(context, const HomePage());
+
+      // NewPageRout.newPage(context, const HomePage());
+      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (c)=>HomePage()), (route) => false);
       loading=false;
       notifyListeners();
     }
