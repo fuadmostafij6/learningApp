@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:learningapp/constant/rout_page.dart';
 import 'package:learningapp/service/google_service.dart';
+
+import '../screen/post_details.dart';
 class PostWidget extends StatelessWidget {
   final String displayName;
   final String image;
   final String postText;
   final String commentLength;
+  final bool ?tap;
+  final String id;
 
-  const PostWidget({Key? key, required this.displayName, required this.image, required this.postText,required this.commentLength}) : super(key: key);
+  const PostWidget({Key? key, required this.displayName, required this.image, required this.postText,required this.commentLength, this.tap, required this.id}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +40,14 @@ class PostWidget extends StatelessWidget {
           SizedBox(height: 5,),
           Row (
             children: [
-              Icon(Icons.insert_comment,size: 25,),
+              InkWell(
+                  onTap:
+
+                   tap==true?
+                       (){
+                    NewPageRout.newPage(context, PostDetails(id: id,));
+                  }:null,
+                  child: Icon(Icons.insert_comment,size: 25,)),
               SizedBox(width: 5,),
               Text(commentLength,style: TextStyle(fontSize:15,fontWeight: FontWeight.bold),)
             ],

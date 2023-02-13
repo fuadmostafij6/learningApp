@@ -28,6 +28,7 @@ class _ForumScreenState extends State<ForumScreen> {
       "time": FieldValue.serverTimestamp(),
       "type": type,
       "post_id": docs.toString(),
+      "comment_length":"0",
       "user_id": Googlehelper.firebaseAuth.currentUser!.uid,
       "user_name": Googlehelper.firebaseAuth.currentUser!.displayName,
       "user_image": Googlehelper.firebaseAuth.currentUser!.photoURL,
@@ -46,7 +47,7 @@ class _ForumScreenState extends State<ForumScreen> {
     });
   }
 
-  var Pages = [Feed(), Announcement(), Question()];
+
   Future<void> _showAlertDialog(
     String data,
   ) async {
@@ -66,7 +67,7 @@ class _ForumScreenState extends State<ForumScreen> {
                 SizedBox(height: 7,),
                 Text('Post Your $data'),
                 SizedBox(height: 15,),
-                TextField(
+                TextFormField(
                   minLines: 2,
                   maxLines: 10,
                   controller:postController,
@@ -144,6 +145,19 @@ class _ForumScreenState extends State<ForumScreen> {
   @override
   Widget build(BuildContext context) {
     final tabBarList = ["Feed", "Announcement", "Question"];
+    var Pages = [Feed(type:selectedIndex == 0
+        ? "Feed"
+        : selectedIndex == 1
+        ? "Announcement"
+        : "Question" ,), Announcement(type:selectedIndex == 0
+        ? "Feed"
+        : selectedIndex == 1
+        ? "Announcement"
+        : "Question" ,), Question(type:selectedIndex == 0
+        ? "Feed"
+        : selectedIndex == 1
+        ? "Announcement"
+        : "Question" ,)];
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: AppBar().preferredSize,
