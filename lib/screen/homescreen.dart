@@ -7,6 +7,7 @@ import 'package:learningapp/widget/books_containar.dart';
 
 import '../constant/rout_page.dart';
 import '../service/google_service.dart';
+import '../widget/drower_widget.dart';
 
 
 class HomePage extends StatelessWidget {
@@ -22,19 +23,7 @@ class HomePage extends StatelessWidget {
           child:
           NewAppBar.buildAppBar(name: "Home", ),
         ),
-        drawer: Drawer(
-          child: ListView(
-            children: [
-              ListTile(
-                title: Text("Log out"),
-                onTap: ()async{
-                  await Googlehelper.firebaseAuth.signOut();
-                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (c)=>GoogleLoginScreen()), (route) => false);
-                },
-              )
-            ],
-          ),
-        ),
+        drawer: buildDrawer(context),
         body: FutureBuilder(
            future: Googlehelper.FireBaseStore.collection("book").get(),
           builder: (BuildContext context, AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
@@ -72,6 +61,8 @@ class HomePage extends StatelessWidget {
     );
 
   }
+
+
 
 
 }
