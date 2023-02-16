@@ -12,16 +12,18 @@ Widget customFeed(String type) {
       StreamBuilder<QuerySnapshot>(
           stream:Googlehelper.FireBaseStore.collection("Post").snapshots(),
           builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot, ) {
-            if(!snapshot.hasData){
+
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(child: CircularProgressIndicator(),);
+            }
+            else if(!snapshot.hasData){
               return Center(
                 child: Text("Data Not Found"),
               );}
             else if (snapshot.hasError) {
               return Text('Something went wrong');
             }
-            if (snapshot.connectionState == ConnectionState.done) {
-              return Center(child: CircularProgressIndicator(),);
-            }
+
             return ListView.builder(
               primary: false,
               shrinkWrap: true,

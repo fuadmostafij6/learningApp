@@ -1,12 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:learningapp/controllar/google_provider.dart';
+import 'package:learningapp/screen/BottomNav.dart';
 import 'package:learningapp/screen/auth/google_loginpage.dart';
 import 'package:learningapp/screen/homescreen.dart';
 import 'package:learningapp/service/google_service.dart';
 import 'package:provider/provider.dart';
 
-import 'controllar/BookListProvider.dart';
+import 'controllar/ForumProvider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,7 +16,7 @@ void main() async {
   runApp( MultiProvider(
     providers: [
       ChangeNotifierProvider(create: ((context) => GoogleLogin())),
-      ChangeNotifierProvider(create: ((context) => BookListProvider())),
+      ChangeNotifierProvider(create: ((context) => ForumProvider())),
 
     ],
 
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
       ),
       home:
       Googlehelper.firebaseAuth.currentUser ==null?
-      GoogleLoginScreen(): HomePage(),
+      GoogleLoginScreen(): BNB(),
 
     );
   }

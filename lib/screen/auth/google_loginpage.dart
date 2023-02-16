@@ -7,7 +7,7 @@ class GoogleLoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final GoogleLogin controllar = Provider.of<GoogleLogin>(context,listen: false);
+    //final GoogleLogin controllar = Provider.of<GoogleLogin>(context,listen: false);
     return Scaffold(
       appBar:  PreferredSize(
         preferredSize: AppBar().preferredSize,

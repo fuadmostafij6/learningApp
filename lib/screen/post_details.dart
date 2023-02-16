@@ -123,7 +123,7 @@ class _PostDetailsState extends State<PostDetails> {
           stream: Googlehelper.FireBaseStore.collection('Post').doc(widget.id).snapshots(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
-                return new Text("Loading");
+                return new Text("No data");
               }
               var data = snapshot.data!;
               return
@@ -152,7 +152,7 @@ class _PostDetailsState extends State<PostDetails> {
                     else if (snapshot.hasError) {
                       return Text('Something went wrong');
                     }
-                    if (snapshot.connectionState == ConnectionState.done) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
                       return Center(child: CircularProgressIndicator(),);
                     }
 

@@ -15,26 +15,18 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar:
-
-        PreferredSize(
-          preferredSize: AppBar().preferredSize,
-          child:
-          NewAppBar.buildAppBar(name: "Home", ),
-        ),
-        drawer: buildDrawer(context),
-        body: FutureBuilder(
-           future: Googlehelper.FireBaseStore.collection("book").get(),
-          builder: (BuildContext context, AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+    return
+      FutureBuilder(
+        future: Googlehelper.FireBaseStore.collection("book").get(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
           if(snapshot.connectionState ==ConnectionState.waiting){
             return Center(child: CircularProgressIndicator(),);}
           else if (snapshot.hasData) {
             return GridView.builder(
-                  itemCount: snapshot.data!.docs.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                   crossAxisCount: 3,
-                   childAspectRatio:0.8
+                itemCount: snapshot.data!.docs.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    childAspectRatio:0.8
                 ),
                 itemBuilder: (BuildContext context, int index){
                   DocumentSnapshot data = snapshot.data!.docs[index];
@@ -57,8 +49,7 @@ class HomePage extends StatelessWidget {
             return Center(child: Text("No Data"));
           }
         },
-        )
-    );
+      );
 
   }
 
@@ -66,6 +57,9 @@ class HomePage extends StatelessWidget {
 
 
 }
+
+
+
 //ListView.builder(
 //                 itemCount: snapshot.data!.docs.length,
 //                 primary: false,
