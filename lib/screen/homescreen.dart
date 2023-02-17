@@ -23,6 +23,8 @@ class HomePage extends StatelessWidget {
             return Center(child: CircularProgressIndicator(),);}
           else if (snapshot.hasData) {
             return GridView.builder(
+              shrinkWrap: true,
+                primary: false,
                 itemCount: snapshot.data!.docs.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,
