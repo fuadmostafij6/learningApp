@@ -13,7 +13,9 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-  runApp( MultiProvider(
+  runApp(
+
+      MultiProvider(
     providers: [
       ChangeNotifierProvider(create: ((context) => GoogleLogin())),
       ChangeNotifierProvider(create: ((context) => ForumProvider())),
