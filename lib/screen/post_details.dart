@@ -29,7 +29,7 @@ class _PostDetailsState extends State<PostDetails> {
 
   updateCommentCount(String length)async{
     Googlehelper.FireBaseStore.collection('Post').doc(widget.id).update({
-"comment_length":length
+    "comment_length":length
     });
   }
 
@@ -58,7 +58,8 @@ class _PostDetailsState extends State<PostDetails> {
 
 
       ),
-      bottomNavigationBar: Container(
+      bottomNavigationBar:
+      Container(
         padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
         child: Row(
           children: [
@@ -133,6 +134,7 @@ class _PostDetailsState extends State<PostDetails> {
                   postText: data["Post"],
                   commentLength:data["comment_length"],
                  id:data["post_id"] ,
+
                 );
             }
     ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learningapp/constant/rout_page.dart';
+import 'package:learningapp/screen/auth/loginScreen.dart';
 
 import '../screen/ForumScreen.dart';
 import '../screen/auth/google_loginpage.dart';
@@ -14,15 +15,15 @@ Widget buildDrawer(BuildContext context) {
         SizedBox(
           height: 15,
         ),
-        CircleAvatar(
-          radius: 90,
-          backgroundColor: Colors.black,
-          child: CircleAvatar(
-            radius: 80,
-            backgroundImage:
-                NetworkImage(Googlehelper.firebaseAuth.currentUser!.photoURL!),
-          ),
-        ),
+        // CircleAvatar(
+        //   radius: 90,
+        //   backgroundColor: Colors.black,
+        //   child: CircleAvatar(
+        //     radius: 80,
+        //     backgroundImage:
+        //         NetworkImage(Googlehelper.firebaseAuth.currentUser!.photoURL!),
+        //   ),
+        // ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
@@ -56,7 +57,7 @@ Widget buildDrawer(BuildContext context) {
                 await Googlehelper.firebaseAuth.signOut();
                 Navigator.pushAndRemoveUntil(
                     context,
-                    MaterialPageRoute(builder: (c) => GoogleLoginScreen()),
+                    MaterialPageRoute(builder: (c) => LoginPage()),
                     (route) => false);
               },
             ),

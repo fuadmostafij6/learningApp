@@ -36,6 +36,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+
   #firebase_service
   firebase_core: ^2.5.0
   google_sign_in: ^5.4.4
@@ -49,6 +50,9 @@ dependencies:
 
   #pdf
   syncfusion_flutter_pdfviewer: ^20.4.49
+
+  modal_progress_hud_nsn: ^0.3.0
+  validators: ^3.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -74,6 +78,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
      - image/
+     - assets/images/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

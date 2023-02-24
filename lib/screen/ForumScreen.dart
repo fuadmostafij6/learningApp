@@ -39,15 +39,18 @@ class _ForumScreenState extends State<ForumScreen> {
     final  controller = Provider.of<ForumProvider>(context,listen: true);
     final tabBarList = ["Feed", "Announcement", "Question"];
     print(controller.selectedIndex);
-    var Pages = [Feed(type:controller.selectedIndex == 0
+    var Pages = [
+      Feed(type:controller.selectedIndex == 0
         ? "Feed"
         : controller.selectedIndex == 1
         ? "Announcement"
-        : "Question" ,), Announcement(type:controller.selectedIndex == 0
+        : "Question" ,),
+      Announcement(type:controller.selectedIndex == 0
         ? "Feed"
         : controller.selectedIndex == 1
         ? "Announcement"
-        : "Question" ,), Question(type:controller.selectedIndex == 0
+        : "Question" ,),
+      Question(type:controller.selectedIndex == 0
         ? "Feed"
         : controller.selectedIndex == 1
         ? "Announcement"

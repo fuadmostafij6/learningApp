@@ -8,7 +8,8 @@ import '../service/google_service.dart';
 
 Widget customFeed(String type) {
   return StreamBuilder<QuerySnapshot>(
-       stream:Googlehelper.FireBaseStore.collection("Post").snapshots(),
+       stream:
+       Googlehelper.FireBaseStore.collection("Post").snapshots(),
        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot, ) {
 
          if (snapshot.connectionState == ConnectionState.waiting) {
@@ -41,7 +42,8 @@ Widget customFeed(String type) {
                    commentLength:data["comment_length"],
                    tap: true, id:data["post_id"] ,
                  ),
-               ):Container();
+               )
+                   :Container();
            },
          );
        }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:learningapp/controllar/google_provider.dart';
 import 'package:learningapp/screen/BottomNav.dart';
 import 'package:learningapp/screen/auth/google_loginpage.dart';
+import 'package:learningapp/screen/auth/loginScreen.dart';
 import 'package:learningapp/screen/homescreen.dart';
 import 'package:learningapp/service/google_service.dart';
 import 'package:provider/provider.dart';
@@ -43,7 +44,7 @@ class MyApp extends StatelessWidget {
       ),
       home:
       Googlehelper.firebaseAuth.currentUser ==null?
-      GoogleLoginScreen(): BNB(),
+      LoginPage(): BNB(),
 
     );
   }
