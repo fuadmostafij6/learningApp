@@ -25,7 +25,7 @@ class GoogleLogin extends ChangeNotifier{
     loading=true;
     notifyListeners();
     final user =await Googlehelper().signInWithGoogle(context);
-
+//
     if(user!=null){
       postUserData(user.user!.uid,user.user!.displayName,user.user!.email,user.user!.phoneNumber,user.user!.photoURL, );
       // NewPageRout.newPage(context, const HomePage());
