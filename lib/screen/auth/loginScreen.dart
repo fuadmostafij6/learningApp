@@ -232,7 +232,7 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     Text(
                       'Don\'t have an account?',
-                      style: TextStyle(fontSize: 25.0),
+                      style: TextStyle(fontSize: 15.0),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -240,7 +240,7 @@ class _LoginPageState extends State<LoginPage> {
                       },
                       child: Text(
                         ' Sign Up',
-                        style: TextStyle(fontSize: 25.0, color: Colors.blue),
+                        style: TextStyle(fontSize: 15.0, color: Colors.blue),
                       ),
                     ),
                   ],

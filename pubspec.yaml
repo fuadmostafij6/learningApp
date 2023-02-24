@@ -42,6 +42,8 @@ dependencies:
   google_sign_in: ^5.4.4
   firebase_auth: ^4.2.6
   cloud_firestore: ^4.3.2
+  intl:
+  firebase_storage: ^11.0.10
 
   #state_management
   provider: ^6.0.5
@@ -53,6 +55,11 @@ dependencies:
 
   modal_progress_hud_nsn: ^0.3.0
   validators: ^3.0.0
+
+#  image Picar
+  file_picker: 5.2.4
+  image_picker: ^0.8.6
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
