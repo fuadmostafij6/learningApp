@@ -2,13 +2,13 @@
 import 'package:flutter/material.dart';
 import 'package:learningapp/constant/rout_page.dart';
 import 'package:learningapp/screen/homescreen.dart';
-// import '../Constant/pageRout.dart';
-// import '../Services/GoogleServices.dart';
-// import '../page/Call_Ganerate_screen/call_genaret_screen.dart';
 import '../screen/BottomNav.dart';
 import '../service/google_service.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class GoogleLogin extends ChangeNotifier{
+
+  var box=Hive.box("user");
 
   bool loading = false;
   postUserData(uuid, name, email, phone, image){
@@ -20,12 +20,16 @@ class GoogleLogin extends ChangeNotifier{
       "email":"${email}",
       "phone":"${phone}"
     });
+    box.put("uid", uuid);
+    box.put("name", name);
+    box.put("email", email);
+    box.put("image", image);
   }
   login(BuildContext context)async{
     loading=true;
     notifyListeners();
     final user =await Googlehelper().signInWithGoogle(context);
-////
+
     if(user!=null){
       postUserData(user.user!.uid,user.user!.displayName,user.user!.email,user.user!.phoneNumber,user.user!.photoURL, );
       // NewPageRout.newPage(context, const HomePage());
@@ -35,10 +39,5 @@ class GoogleLogin extends ChangeNotifier{
     }
 
   }
-
-}
-
-
-class sdfg {
 
 }

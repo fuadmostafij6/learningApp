@@ -10,7 +10,7 @@ import 'package:learningapp/service/google_service.dart';
 import 'package:provider/provider.dart';
 import 'package:validators/validators.dart' as validator;
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-
+import 'package:hive_flutter/hive_flutter.dart';
 import '../../controllar/google_provider.dart';
 class RegisterPage extends StatefulWidget {
 
@@ -19,6 +19,9 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+
+  var box=Hive.box('user');
+
   String? name;
   String? email;
   String? password;
@@ -65,6 +68,12 @@ postUserData(uuid){
     "email":"${email}",
     "phone":"${phone}"
   });
+
+  box.put("uid", uuid);
+  box.put("name", name);
+  box.put("email", email);
+  box.put('image', imagepath);
+
 }
   @override
   Widget build(BuildContext context) {
@@ -155,7 +164,9 @@ postUserData(uuid){
                       ],
                     ),
 
-                    Column(
+                    ListView(
+                      primary: false,
+                      shrinkWrap: true,
                       children: [
                         TextField(
                           keyboardType: TextInputType.name,
@@ -303,9 +314,7 @@ postUserData(uuid){
                       ],
                     ),
                     Consumer<GoogleLogin>(builder: ((context, value, child) {
-
                       return
-
                         Padding(
                           padding: const EdgeInsets.only(left: 20,right: 20),
                           child: InkWell(
@@ -353,6 +362,7 @@ postUserData(uuid){
                           onTap: () {
                             Navigator.pop(context);
                           //  Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage()));
+
                           },
                           child: Text(
                             ' Sign In',

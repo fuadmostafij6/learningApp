@@ -5,8 +5,10 @@ import 'package:learningapp/screen/auth/loginScreen.dart';
 import '../screen/ForumScreen.dart';
 import '../screen/auth/google_loginpage.dart';
 import '../service/google_service.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 Widget buildDrawer(BuildContext context) {
+  var box=Hive.box('user');
   return Drawer(
     child: ListView(
       shrinkWrap: true,
@@ -53,6 +55,7 @@ Widget buildDrawer(BuildContext context) {
                 ),
               ),
               onTap: () async {
+                box.clear();
                 await Googlehelper.googlesignin.signOut();
                 await Googlehelper.firebaseAuth.signOut();
                 Navigator.pushAndRemoveUntil(

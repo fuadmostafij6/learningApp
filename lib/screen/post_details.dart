@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import '../constant/rout_page.dart';
 import '../service/google_service.dart';
 import '../widget/postWidget.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class PostDetails extends StatefulWidget {
   final String id;
@@ -19,6 +20,8 @@ class PostDetails extends StatefulWidget {
 }
 
 class _PostDetailsState extends State<PostDetails> {
+
+  var box=Hive.box('user');
   TextEditingController commentController = TextEditingController();
 
   @override
@@ -35,13 +38,15 @@ class _PostDetailsState extends State<PostDetails> {
 
   Future comment() async{
     var docs = DateTime.now().microsecondsSinceEpoch;
-    Googlehelper.FireBaseStore.collection('Post').doc(widget.id).collection("Comment").doc(docs.toString()).set({
+    Googlehelper.FireBaseStore.collection('Post').doc(widget.id).collection("Comment").doc(docs.toString())
+        .set({
 
       "comment_id": docs.toString(),
       "comment": commentController.text,
-      "user_id": Googlehelper.firebaseAuth.currentUser!.uid,
-      "user_name": Googlehelper.firebaseAuth.currentUser!.displayName,
-      "user_image": Googlehelper.firebaseAuth.currentUser!.photoURL,
+      "user_id": box.get('uid'),
+      "user_name":box.get('name'),
+      "user_image": box.get('image'),
+
 
     });
   }

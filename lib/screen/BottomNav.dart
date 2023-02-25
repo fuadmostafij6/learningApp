@@ -12,6 +12,7 @@ import '../controllar/ForumProvider.dart';
 import '../service/google_service.dart';
 import '../widget/drower_widget.dart';
 import 'ProfileScreen.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class BNB extends StatefulWidget {
   const BNB({Key? key}) : super(key: key);
@@ -21,6 +22,7 @@ class BNB extends StatefulWidget {
 }
 
 class _BNBState extends State<BNB> {
+  var box=Hive.box('user');
   int _selectedIndex = 0;
   static  List<Widget> _widgetOptions = <Widget>[
   HomePage(),
@@ -44,9 +46,9 @@ class _BNBState extends State<BNB> {
       "type": type,
       "post_id": docs.toString(),
       "comment_length":"0",
-      "user_id": Googlehelper.firebaseAuth.currentUser!.uid,
-      "user_name": Googlehelper.firebaseAuth.currentUser!.displayName,
-      "user_image": Googlehelper.firebaseAuth.currentUser!.photoURL,
+      "user_id": box.get('uid'),
+      "user_name":box.get('name') ,
+      "user_image":box.get('image'),
     });
   }
 

@@ -7,12 +7,16 @@ import 'package:learningapp/screen/auth/loginScreen.dart';
 import 'package:learningapp/screen/homescreen.dart';
 import 'package:learningapp/service/google_service.dart';
 import 'package:provider/provider.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import 'controllar/ForumProvider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await Hive.initFlutter();
+  await Hive.openBox("user");
+
 
   runApp(
 
