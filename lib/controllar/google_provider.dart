@@ -21,9 +21,7 @@ class GoogleLogin extends ChangeNotifier{
       "phone":"${phone}"
     });
     box.put("uid", uuid);
-    // box.put("name", name);
-    // box.put("email", email);
-    // box.put("image", image);
+
   }
   login(BuildContext context)async{
     loading=true;

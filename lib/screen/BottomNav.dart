@@ -162,7 +162,7 @@ class _BNBState extends State<BNB> {
   TextEditingController postController = TextEditingController();
   var profileImage = "";
   getProfileImage()async{
-    await Googlehelper.FireBaseStore.collection("user").doc(box.get("uid").toString()).get().then((value) {
+    await Googlehelper.FireBaseStore.collection("user").doc("${box.get("uid")}").get().then((value) {
       setState(() {
         profileImage=value["image"];
       });

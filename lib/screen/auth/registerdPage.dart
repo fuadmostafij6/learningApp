@@ -48,6 +48,7 @@ class _RegisterPageState extends State<RegisterPage> {
     });
 
     Reference reference=FirebaseStorage.instance.ref().child(DateTime.now().toString());
+
     await reference.putFile(File(imagefile!.path));
     reference.getDownloadURL().then((value){
       setState(() {
@@ -130,11 +131,13 @@ Future postUserData(uuid)async{
                     Stack(
                       alignment: Alignment.center,
                       children: [
-                        imagefile !=null? CircleAvatar(
+                        imagefile !=null?
+                        CircleAvatar(
                           radius: 55,
                           backgroundColor: Colors.white,
                           backgroundImage: FileImage(File(imagefile!.path)),
-                        ):CircleAvatar(
+                        ):
+                        CircleAvatar(
                           radius: 55,
                           backgroundColor: Colors.amberAccent.withOpacity(0.3),),
 
@@ -142,11 +145,12 @@ Future postUserData(uuid)async{
                           padding: const EdgeInsets.only(left: 95,top: 35),
                           child: InkWell(
                             onTap: (){
+
                               showDialog(
                                   context: context,
                                   builder: (_){
                                     return AlertDialog(
-                                      title: Text("Uplod a Photo"),
+                                      title: Text("Upload a Photo"),
                                       content:  Row(
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -163,7 +167,7 @@ Future postUserData(uuid)async{
                                                 takePhoto(ImageSource.gallery);
                                                 Navigator.pop(context);
                                               },
-                                              child: Text("Gallary"))
+                                              child: Text("Gallery"))
                                         ],
                                       ),
                                     );
@@ -241,8 +245,7 @@ Future postUserData(uuid)async{
                             });
 
                             if(imagepath !=null){
-                              final newUser =
-                              await Googlehelper.firebaseAuth.createUserWithEmailAndPassword(
+                              final newUser = await Googlehelper.firebaseAuth.createUserWithEmailAndPassword(
                                 email: email!,
                                 password: password!,
                               );

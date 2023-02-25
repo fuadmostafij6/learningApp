@@ -18,11 +18,18 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-Future.delayed(Duration(seconds: 5),(){
+  Future.delayed(Duration(seconds: 5),(){
   Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>   Googlehelper.firebaseAuth.currentUser ==null?
   LoginPage(): BNB(),), (route) => false);
 });
     super.initState();
+  }
+
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
   }
   @override
   Widget build(BuildContext context) {

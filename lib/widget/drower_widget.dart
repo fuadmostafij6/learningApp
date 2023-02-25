@@ -56,7 +56,7 @@ Widget buildDrawer(BuildContext context, String image) {
               ),
               onTap: () async {
                 box.clear();
-                await Googlehelper.googlesignin.signOut();
+                 // await Googlehelper.googlesignin.signOut();
                 await Googlehelper.firebaseAuth.signOut();
                 Navigator.pushAndRemoveUntil(
                     context,
