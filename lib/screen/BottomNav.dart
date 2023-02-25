@@ -37,19 +37,29 @@ class _BNBState extends State<BNB> {
   }
 
   Post(String type) async {
+
     var docs = DateTime.now().microsecondsSinceEpoch;
-    await Googlehelper.FireBaseStore.collection("Post")
-        .doc(docs.toString())
-        .set({
-      "Post": postController.text,
-      "time": FieldValue.serverTimestamp(),
-      "type": type,
-      "post_id": docs.toString(),
-      "comment_length":"0",
-      "user_id": box.get('uid'),
-      "user_name":box.get('name') ,
-      "user_image":box.get('image'),
+    await Googlehelper.FireBaseStore.collection("user").doc(box.get("uid").toString()).get().then((value) async{
+      print(value["image"]);
+      print(value["full_name"]);
+      print(value["uid"]);
+
+      await Googlehelper.FireBaseStore.collection("Post")
+          .doc(docs.toString())
+          .set({
+        "Post": postController.text,
+        "time": FieldValue.serverTimestamp(),
+        "type": type,
+        "post_id": docs.toString(),
+        "comment_length":"0",
+        "user_id": value["uid"],
+        "user_name":value["full_name"] ,
+        "user_image":value["image"],
+      }).then((value){
+        postController.clear();
+      });
     });
+
   }
 
 
@@ -107,7 +117,7 @@ class _BNBState extends State<BNB> {
                       if(postController.text.isNotEmpty){
                         Post(data);
                         Navigator.pop(context);
-                        postController.clear();
+
                       }
                       else{
                         NewFlutterToast.errorToast("Please Insert your $data");
@@ -148,7 +158,21 @@ class _BNBState extends State<BNB> {
   }
 
 
+
   TextEditingController postController = TextEditingController();
+  var profileImage = "";
+  getProfileImage()async{
+    await Googlehelper.FireBaseStore.collection("user").doc(box.get("uid").toString()).get().then((value) {
+      setState(() {
+        profileImage=value["image"];
+      });
+    });
+  }
+  @override
+  void initState() {
+    getProfileImage();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     final  controller = Provider.of<ForumProvider>(context,listen: false);
@@ -160,7 +184,7 @@ class _BNBState extends State<BNB> {
         child:
         NewAppBar.buildAppBar(name:_selectedIndex==0? "Home":_selectedIndex==1? "Forum":"Profile", ),
       ),
-      drawer: buildDrawer(context),
+      drawer: buildDrawer(context, profileImage),
       floatingActionButton:
       _selectedIndex==1?
 

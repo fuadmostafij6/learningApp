@@ -38,17 +38,20 @@ class _PostDetailsState extends State<PostDetails> {
 
   Future comment() async{
     var docs = DateTime.now().microsecondsSinceEpoch;
-    Googlehelper.FireBaseStore.collection('Post').doc(widget.id).collection("Comment").doc(docs.toString())
-        .set({
+    await Googlehelper.FireBaseStore.collection("user").doc(box.get("uid").toString()).get().then((value)async{
+      await Googlehelper.FireBaseStore.collection('Post').doc(widget.id).collection("Comment").doc(docs.toString())
+          .set({
 
-      "comment_id": docs.toString(),
-      "comment": commentController.text,
-      "user_id": box.get('uid'),
-      "user_name":box.get('name'),
-      "user_image": box.get('image'),
+        "comment_id": docs.toString(),
+        "comment": commentController.text,
+        "user_id": value["uid"],
+        "user_name":value["full_name"] ,
+        "user_image":value["image"],
 
 
+      });
     });
+
   }
 
   @override

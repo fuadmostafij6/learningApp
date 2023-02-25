@@ -7,7 +7,7 @@ import '../screen/auth/google_loginpage.dart';
 import '../service/google_service.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-Widget buildDrawer(BuildContext context) {
+Widget buildDrawer(BuildContext context, String image) {
   var box=Hive.box('user');
   return Drawer(
     child: ListView(
@@ -17,15 +17,15 @@ Widget buildDrawer(BuildContext context) {
         SizedBox(
           height: 15,
         ),
-        // CircleAvatar(
-        //   radius: 90,
-        //   backgroundColor: Colors.black,
-        //   child: CircleAvatar(
-        //     radius: 80,
-        //     backgroundImage:
-        //         NetworkImage(Googlehelper.firebaseAuth.currentUser!.photoURL!),
-        //   ),
-        // ),
+        CircleAvatar(
+          radius: 90,
+          backgroundColor: Colors.black,
+          child: CircleAvatar(
+            radius: 80,
+            backgroundImage:
+                NetworkImage(image),
+          ),
+        ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(

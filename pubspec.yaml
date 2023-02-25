@@ -57,11 +57,13 @@ dependencies:
   validators: ^3.0.0
 
 #  image Picar
-  file_picker: 5.2.4
+
   image_picker: ^0.8.6
 #  local Database
   hive: ^2.2.3
   hive_flutter: ^1.1.0
+
+  lottie: ^2.2.0
 
 dev_dependencies:
   flutter_test:

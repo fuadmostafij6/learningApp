@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:learningapp/constant/rout_page.dart';
 import 'package:learningapp/screen/auth/registerdPage.dart';
 import 'package:learningapp/service/google_service.dart';
@@ -30,13 +31,17 @@ class _LoginPageState extends State<LoginPage> {
 
 
 
+
+
+
   String emailText = 'Email doesn\'t match';
   String passwordText = 'Password doesn\'t match';
-
+  var box=Hive.box('user');
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
       body: Stack(
         children: [
@@ -115,6 +120,7 @@ class _LoginPageState extends State<LoginPage> {
                       final newUser = await Googlehelper.firebaseAuth.signInWithEmailAndPassword(
                           email: email!, password: password!);
                       if (newUser != null) {
+                        box.put("uid", newUser.user!.uid);
                         Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>BNB()), (route) => false);
                         setState(() {
                           _showSpinner = false;

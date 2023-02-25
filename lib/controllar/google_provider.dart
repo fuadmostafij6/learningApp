@@ -21,9 +21,9 @@ class GoogleLogin extends ChangeNotifier{
       "phone":"${phone}"
     });
     box.put("uid", uuid);
-    box.put("name", name);
-    box.put("email", email);
-    box.put("image", image);
+    // box.put("name", name);
+    // box.put("email", email);
+    // box.put("image", image);
   }
   login(BuildContext context)async{
     loading=true;
@@ -34,6 +34,10 @@ class GoogleLogin extends ChangeNotifier{
       postUserData(user.user!.uid,user.user!.displayName,user.user!.email,user.user!.phoneNumber,user.user!.photoURL, );
       // NewPageRout.newPage(context, const HomePage());
       Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (c)=>BNB()), (route) => false);
+      loading=false;
+      notifyListeners();
+    }
+    else{
       loading=false;
       notifyListeners();
     }

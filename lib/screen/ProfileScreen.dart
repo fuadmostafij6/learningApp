@@ -35,32 +35,12 @@ class _ProfileState extends State<Profile> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Stack(
-                      clipBehavior: Clip.none,
-                     children: [
-
-                       Container(
-                         height:MediaQuery.of(context).size.height/4 ,
-                         decoration: BoxDecoration(
-                             color: Colors.greenAccent,
-                             borderRadius: BorderRadius.only(bottomRight: Radius.circular(15),bottomLeft: Radius.circular(15),
-                             )
-                         ),
-                       ),
-                       Padding(
-                         padding: const EdgeInsets.only(top: 15,left: 145),
-                         child: Text("${document["full_name"]}",style: TextStyle(
-                             fontWeight: FontWeight.bold,fontSize: 25,color: Colors.white
-                         ),),
-                       ),
-                       Padding(
-                         padding: const EdgeInsets.only(top: 70,left: 100),
-                         child: CircleAvatar(
-                           radius: 70,
-                           backgroundImage: NetworkImage("${document["image"]}"),
-                         ),
-                       ),
-                     ],
+                    Padding(
+                      padding: const EdgeInsets.only(top: 70,left: 100),
+                      child: CircleAvatar(
+                        radius: 70,
+                        backgroundImage: NetworkImage("${document["image"]}"),
+                      ),
                     ),
 
                     Padding(
@@ -73,11 +53,11 @@ class _ProfileState extends State<Profile> {
                               fontWeight: FontWeight.bold,fontSize: 25,color: Colors.black
                           ),),
                           SizedBox(height: 10,),
-                          Text("Name : ${document["phone"]}",style: TextStyle(
+                          Text("phone : ${document["phone"]??""}",style: TextStyle(
                               fontWeight: FontWeight.bold,fontSize: 25,color: Colors.black
                           ),),
                           SizedBox(height: 10,),
-                          Text("Name : ${document["email"]}",style: TextStyle(
+                          Text("Email : ${document["email"]}",style: TextStyle(
                               fontWeight: FontWeight.bold,fontSize: 25,color: Colors.black
                           ),),
                           SizedBox(height: 10,),

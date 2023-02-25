@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:learningapp/constant/flutterToast.dart';
 import 'package:learningapp/screen/BottomNav.dart';
 import 'package:learningapp/screen/auth/loginScreen.dart';
 import 'package:learningapp/service/google_service.dart';
@@ -59,31 +60,42 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
 
-postUserData(uuid){
-  //var doc = DateTime.now().microsecondsSinceEpoch.toString();
-  Googlehelper.FireBaseStore.collection("user").doc(uuid).set({
-    "uid":"${uuid}",
-    "full_name":"${name}",
-    "image":imagepath??"",
-    "email":"${email}",
-    "phone":"${phone}"
-  });
+Future postUserData(uuid)async{
+    print("post");
+    if(imagepath !=null){
+      await Googlehelper.FireBaseStore.collection("user").doc(uuid).set({
+        "uid":"${uuid}",
+        "full_name":"${name}",
+        "image":imagepath!,
+        "email":"${email}",
+        "phone":"${phone}"
+      }).then((value){
+        print("posted");
+      });
 
-  box.put("uid", uuid);
-  box.put("name", name);
-  box.put("email", email);
-  box.put('image', imagepath);
+      box.put("uid", uuid);
+      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>BNB()), (route) => false);
+    }
+
+    else{
+      NewFlutterToast.errorToast("Please Provide a image");
+    }
+  //var doc = DateTime.now().microsecondsSinceEpoch.toString();
+
+  // box.put("name", name);
+  // box.put("email", email);
+  // box.put('image', imagepath);
 
 }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      resizeToAvoidBottomInset: false,
-      body: SingleChildScrollView(
-        child: ModalProgressHUD(
-          inAsyncCall: _showSpinner,
-          color: Colors.blueAccent,
+      resizeToAvoidBottomInset: true,
+      body: ModalProgressHUD(
+        inAsyncCall: _showSpinner,
+        color: Colors.blueAccent,
+        child: SingleChildScrollView(
           child: Stack(
             children: [
               Align(
@@ -164,9 +176,7 @@ postUserData(uuid){
                       ],
                     ),
 
-                    ListView(
-                      primary: false,
-                      shrinkWrap: true,
+                    Column(
                       children: [
                         TextField(
                           keyboardType: TextInputType.name,
@@ -209,7 +219,7 @@ postUserData(uuid){
                           },
                           decoration: InputDecoration(
                             labelText: 'Password',
-                            errorText: _wrongPassword ? _passwordText : null,
+                           // errorText: _wrongPassword ? _passwordText : null,
                           ),
                         ),
                         SizedBox(height: 10.0),
@@ -229,20 +239,35 @@ postUserData(uuid){
                             setState(() {
                               _showSpinner = true;
                             });
-                            final newUser =
-                            await Googlehelper.firebaseAuth.createUserWithEmailAndPassword(
-                              email: email!,
-                              password: password!,
-                            );
-                            if (newUser != null) {
 
-                              print('user authenticated by registration');
-                              postUserData(newUser.user!.uid);
-                              setState(() {
-                                _showSpinner = false;
-                              });
-                              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>BNB()), (route) => false);
+                            if(imagepath !=null){
+                              final newUser =
+                              await Googlehelper.firebaseAuth.createUserWithEmailAndPassword(
+                                email: email!,
+                                password: password!,
+                              );
+
+                              print(newUser.user!.uid.isNotEmpty);
+                              if (newUser.user!.uid.isNotEmpty){
+
+                                print('user authenticated by registration');
+
+                                await postUserData(newUser.user!.uid).then((value){
+
+                                  setState(() {
+                                    _showSpinner = false;
+                                  });
+                                });
+
+
+                              }
                             }
+
+                            else{
+                              NewFlutterToast.errorToast("Please Provide a image");
+                            }
+
+
                           }
 
                           setState(() {
@@ -351,6 +376,7 @@ postUserData(uuid){
                           ),
                         );
                     })),
+                    SizedBox(height: 20,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

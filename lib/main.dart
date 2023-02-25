@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:learningapp/controllar/google_provider.dart';
 import 'package:learningapp/screen/BottomNav.dart';
+import 'package:learningapp/screen/SplashScreen.dart';
 import 'package:learningapp/screen/auth/google_loginpage.dart';
 import 'package:learningapp/screen/auth/loginScreen.dart';
 import 'package:learningapp/screen/homescreen.dart';
@@ -47,8 +48,8 @@ class MyApp extends StatelessWidget {
 
       ),
       home:
-      Googlehelper.firebaseAuth.currentUser ==null?
-      LoginPage(): BNB(),
+      SplashScreen()
+
 
     );
   }
